@@ -20,3 +20,6 @@ credentials.json
 .claude/
 *.claude-session
 plugins/**/node_modules/
+
+# Researcher plugin lives in its own repo (tbuckworth/ai-safety-researcher)
+plugins/researcher

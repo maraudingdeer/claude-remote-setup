@@ -62,6 +62,13 @@
       "version": "1.0.0",
       "source": "./plugins/pre-mortem",
       "category": "development"
+    },
+    {
+      "name": "researcher",
+      "description": "AI Safety R&D Agent — 10-step interactive research workflow using Steinhardt fail-fast methodology",
+      "version": "0.2.0",
+      "source": "./plugins/researcher",
+      "category": "development"
     }
   ]
 }

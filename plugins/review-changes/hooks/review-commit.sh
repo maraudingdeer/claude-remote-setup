@@ -30,11 +30,14 @@ DIFF_TRUNCATED=$(echo "$DIFF" | head -c 8000)
 echo "[review-changes] calling claude -p..." >> "$LOG"
 
 # Use default model (no --model flag = uses user's configured model)
-REVIEW=$(echo "$DIFF_TRUNCATED" | command claude -p "Review this git diff for bugs, security issues, and code quality. 2-3 bullet points max. Only actual issues, not style." 2>/dev/null || echo "")
+REVIEW=$(echo "$DIFF_TRUNCATED" | command claude -p "You review git diffs. Rules: (1) ONLY report bugs, security issues, or logic errors. (2) If none found, respond with exactly: none. (3) No preamble, no 'Here'\''s my review', no style suggestions. Just bullet points or 'none'." 2>/dev/null || echo "")
 
 echo "[review-changes] result: $REVIEW" >> "$LOG"
 
-if [ -z "$REVIEW" ]; then
+# Skip empty or "none" responses
+REVIEW_TRIMMED=$(echo "$REVIEW" | tr -d '[:space:]' | tr '[:upper:]' '[:lower:]')
+if [ -z "$REVIEW" ] || [ "$REVIEW_TRIMMED" = "none" ] || [ "$REVIEW_TRIMMED" = "none." ]; then
+    echo "[review-changes] nothing to report, skipping" >> "$LOG"
     exit 0
 fi
 
