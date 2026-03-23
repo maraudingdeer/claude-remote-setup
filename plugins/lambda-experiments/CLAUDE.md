@@ -4,7 +4,7 @@
 
 - **Hub-and-spoke**: `/lambda` command is the sole orchestrator. It handles all user dialogue (AskUserQuestion) and agent dispatch (Task).
 - **Agents are leaf workers**: They read files, do focused work, write files. They never talk to the user and never spawn other agents.
-- **State survives context loss**: `state/active.md` tracks everything. On context recovery, re-read it and resume from `current_phase`.
+- **State survives context loss**: `~/.claude/lambda-experiments/active.md` tracks everything. On context recovery, re-read it and resume from `current_phase`.
 
 ## Remote Execution Pattern
 
@@ -80,4 +80,6 @@ Reference scripts in `control_arena/settings/post_train_bench/scripts/`:
 - `docs/EXPERIMENT_TYPES.md` -- experiment configuration reference
 - `docs/COST_REFERENCE.md` -- GPU pricing
 
-New findings from runs are queued in `state/new_findings.md` and merged into KNOWN_ISSUES.md on next startup.
+State files (active.md, new_findings.md) live in `~/.claude/lambda-experiments/` — NOT in the plugin directory. This avoids permission prompts when writing state, since `~/.claude/` is always writable.
+
+New findings from runs are queued in `~/.claude/lambda-experiments/new_findings.md` and merged into KNOWN_ISSUES.md on next startup.
