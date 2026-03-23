@@ -25,7 +25,7 @@ You will be given the state file path and knowledge base path. Read them first.
 
 ## Process
 
-1. **Read state**: Parse `state/active.md` for instance IP, log directory, total experiments, launch time, hourly rate
+1. **Read state**: Parse `~/.claude/lambda-experiments/active.md` for instance IP, log directory, total experiments, launch time, hourly rate
 2. **SSH checks** (run all in quick succession):
    ```bash
    # GPU utilization
