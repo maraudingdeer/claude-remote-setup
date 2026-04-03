@@ -83,6 +83,13 @@
       "version": "0.1.0",
       "source": "./plugins/lambda-experiments",
       "category": "development"
+    },
+    {
+      "name": "journal-todoist",
+      "description": "Extract action items from reMarkable Journal entries and create tasks in Todoist",
+      "version": "1.0.0",
+      "source": "./plugins/journal-todoist",
+      "category": "productivity"
     }
   ]
 }
